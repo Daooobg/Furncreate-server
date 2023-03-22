@@ -1,7 +1,7 @@
 const User = require('../models/userModel');
 const dotenv = require('dotenv');
 const jwt = require('../lib/jsonwebtoken');
-
+const AppError = require('../utils/AppError');
 
 dotenv.config({ path: './config.env' });
 
@@ -16,7 +16,31 @@ const createAndSendToken = async (user) => {
   return response;
 };
 
+exports.getUserByEmail = (email) => User.findOne({ email });
+
 exports.register = async (name, email, password, repeatPassword) => {
   const user = await User.create({ name, email, password, repeatPassword });
+  return createAndSendToken(user);
+};
+
+exports.login = async (email, password) => {
+  const user = await this.getUserByEmail(email);
+
+  if (!user) {
+    throw new AppError('Invalid Username or Password!', 401, {
+      email,
+      password,
+    });
+  }
+
+  const isValid = await user.validatePassword(password);
+
+  if (!isValid) {
+    throw new AppError('Invalid Username or Password!', 401, {
+      email,
+      password,
+    });
+  }
+
   return createAndSendToken(user);
 };
