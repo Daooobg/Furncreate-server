@@ -1,7 +1,6 @@
 const furnitureService = require('../services/furnitureService');
 const catchAsync = require('../utils/catchAsync');
 
-
 exports.getAll = catchAsync(async (req, res, next) => {
   const data = await furnitureService.getAll();
   console.log('get All');
@@ -9,7 +8,13 @@ exports.getAll = catchAsync(async (req, res, next) => {
 });
 
 exports.postCreate = catchAsync(async (req, res) => {
-    console.log("post create");
-    const data = await furnitureService.create(req.body, req.user);
-    res.status(200).json({ data });
-  });
+  console.log('post create');
+  const data = await furnitureService.create(req.body, req.user);
+  res.status(200).json({ data });
+});
+
+exports.getOne = catchAsync(async (req, res) => {
+  const furniture = await furnitureService.getOne(req.params.slug);
+
+  res.status(200).json(furniture[0]);
+});
