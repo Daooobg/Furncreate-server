@@ -34,8 +34,9 @@ exports.login = async (email, password) => {
   }
 
   const isValid = await user.validatePassword(password);
-
+  
   if (!isValid) {
+   
     throw new AppError('Invalid Username or Password!', 401, {
       email,
       password,
