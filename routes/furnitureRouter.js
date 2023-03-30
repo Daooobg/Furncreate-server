@@ -5,6 +5,9 @@ router
   .route('/')
   .get(furnitureController.getAll)
   .post(furnitureController.postCreate);
-router.route('/:slug').get(furnitureController.getOne);
+router
+  .route('/:slug')
+  .get(furnitureController.getOne)
+  .patch(furnitureController.updateOne);
 
 module.exports = router;

@@ -13,3 +13,12 @@ exports.getOne = async (slug) => {
 
   return await furniture;
 };
+
+exports.updateOne = async (id, data) => {
+  data.slug = `${data.type.toLowerCase()}-${data.name.toLowerCase()}-${data.partNumber.toLowerCase()}`;
+  const furniture = Furniture.findByIdAndUpdate(id, data, {
+    new: true,
+    runValidators: true,
+  });
+  return furniture;
+};
