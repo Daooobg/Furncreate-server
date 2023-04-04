@@ -8,6 +8,7 @@ router
 router
   .route('/:slug')
   .get(furnitureController.getOne)
-  .patch(furnitureController.updateOne);
+  .patch(furnitureController.updateOne)
+  .delete(furnitureController.deleteOne);
 
 module.exports = router;

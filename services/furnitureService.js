@@ -22,3 +22,9 @@ exports.updateOne = async (id, data) => {
   });
   return furniture;
 };
+
+exports.deleteOne = async (id) => {
+  console.log('gr')
+  const furniture = Furniture.findByIdAndDelete(id);
+  return furniture;
+};

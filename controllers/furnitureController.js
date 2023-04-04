@@ -21,6 +21,15 @@ exports.getOne = catchAsync(async (req, res, next) => {
 
 exports.updateOne = catchAsync(async (req, res, next) => {
   const furniture = await furnitureService.updateOne(req.params.slug, req.body);
-  console.log(furniture);
   res.status(200).json(furniture);
+});
+
+exports.deleteOne = catchAsync(async (req, res, next) => {
+console.log(req)
+  const furniture = await furnitureService.deleteOne(req.params.slug);
+
+  res.status(204).json({
+    status: 'success',
+    data: furniture,
+  });
 });

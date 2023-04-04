@@ -14,7 +14,7 @@ const furnitureSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['sofas', 'chairs', 'tables', 'undefined'],
+    enum: ['sofas', 'chairs', 'tables', 'beds'],
     default: ['undefined'],
   },
   warranty: {
