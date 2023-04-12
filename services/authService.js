@@ -12,7 +12,7 @@ const createAndSendToken = async (user) => {
   const payload = { name: user.name, email: user.email, _id: user._id };
   const token = await jwt.sign(payload, SECRET, { expiresIn: EXPIRES_IN });
 
-  const response = { AccessToken: token, name: user.name, email: user.email };
+  const response = { AccessToken: token, name: user.name, email: user.email, userId: user._id };
   return response;
 };
 
