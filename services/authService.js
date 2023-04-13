@@ -12,11 +12,18 @@ const createAndSendToken = async (user) => {
   const payload = { name: user.name, email: user.email, _id: user._id };
   const token = await jwt.sign(payload, SECRET, { expiresIn: EXPIRES_IN });
 
-  const response = { AccessToken: token, name: user.name, email: user.email, userId: user._id };
+  const response = {
+    AccessToken: token,
+    name: user.name,
+    email: user.email,
+    userId: user._id,
+  };
   return response;
 };
 
 exports.getUserByEmail = (email) => User.findOne({ email });
+
+exports.getUserById = (_id) => User.findById({ _id }).select('-password -__v');
 
 exports.register = async (name, email, password, repeatPassword) => {
   const user = await User.create({ name, email, password, repeatPassword });
@@ -34,9 +41,8 @@ exports.login = async (email, password) => {
   }
 
   const isValid = await user.validatePassword(password);
-  
+
   if (!isValid) {
-   
     throw new AppError('Invalid Username or Password!', 401, {
       email,
       password,

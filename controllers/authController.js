@@ -19,7 +19,7 @@ exports.register = catchAsync(async (req, res, next) => {
     repeatPassword
   );
 
-  res.status(200).json({ token });
+  res.status(200).json(token);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -33,5 +33,10 @@ exports.login = catchAsync(async (req, res, next) => {
 
   const data = await authService.login(email, password);
 
+  res.status(200).json(data);
+});
+
+exports.getUser = catchAsync(async (req, res, next) => {
+  const data = await authService.getUserById(req.user._id);
   res.status(200).json(data);
 });
