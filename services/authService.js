@@ -27,6 +27,18 @@ exports.getUserById = (_id) => User.findById({ _id }).select('-password -__v');
 
 exports.getAllUsers = () => User.find();
 
+exports.updateUser = (id, data) => {
+
+  const user = User.findByIdAndUpdate(
+    data.id,
+    { role: data.role },
+    {
+      runValidators: true,
+    }
+  );
+  return user;
+};
+
 exports.register = async (name, email, password, repeatPassword) => {
   const user = await User.create({ name, email, password, repeatPassword });
   return createAndSendToken(user);
