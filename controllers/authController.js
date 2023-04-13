@@ -40,3 +40,9 @@ exports.getUser = catchAsync(async (req, res, next) => {
   const data = await authService.getUserById(req.user._id);
   res.status(200).json(data);
 });
+
+exports.getAllUsers = catchAsync(async (req, res, next) => {
+  const data = await authService.getAllUsers()
+  console.log(data)
+  res.status(200).json(data)
+})

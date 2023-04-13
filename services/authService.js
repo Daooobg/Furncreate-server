@@ -25,6 +25,8 @@ exports.getUserByEmail = (email) => User.findOne({ email });
 
 exports.getUserById = (_id) => User.findById({ _id }).select('-password -__v');
 
+exports.getAllUsers = () => User.find();
+
 exports.register = async (name, email, password, repeatPassword) => {
   const user = await User.create({ name, email, password, repeatPassword });
   return createAndSendToken(user);
