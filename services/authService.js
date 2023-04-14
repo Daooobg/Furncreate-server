@@ -28,13 +28,21 @@ exports.getUserById = (_id) => User.findById({ _id }).select('-password -__v');
 exports.getAllUsers = () => User.find();
 
 exports.updateUser = (id, data) => {
-
   const user = User.findByIdAndUpdate(
     data.id,
     { role: data.role },
     {
       runValidators: true,
     }
+  );
+  return user;
+};
+
+exports.updateLoginUser = async (data) => {
+  const user = await User.findByIdAndUpdate(
+    data._id,
+    { address: data.address, shippingAddress: data.shippingAddress },
+    { runValidators: true }
   );
   return user;
 };
