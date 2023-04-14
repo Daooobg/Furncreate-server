@@ -14,6 +14,11 @@ exports.getOne = async (slug) => {
   return await furniture;
 };
 
+exports.getOneById = async (id) => {
+  let furniture = await Furniture.findById({ _id: id });
+  return furniture;
+};
+
 exports.updateOne = async (id, data) => {
   data.slug = `${data.type.toLowerCase()}-${data.name.toLowerCase()}-${data.partNumber.toLowerCase()}`;
   const furniture = Furniture.findByIdAndUpdate(id, data, {
@@ -24,7 +29,18 @@ exports.updateOne = async (id, data) => {
 };
 
 exports.deleteOne = async (id) => {
-  console.log('gr')
+  console.log('gr');
   const furniture = Furniture.findByIdAndDelete(id);
   return furniture;
+};
+
+exports.decreaseStock = async (id, quantity) => {
+  const furniture = await this.getOneById(id);
+  const updatedStock = furniture.quantity - quantity;
+  const decreasedFurniture = await Furniture.findByIdAndUpdate(
+    id,
+    { quantity: updatedStock },
+    { runValidators: true }
+  );
+  console.log('dec', decreasedFurniture, updatedStock);
 };
