@@ -6,4 +6,6 @@ router
   .post(purchaseController.createPurchase)
   .get(purchaseController.getOwnPurchases);
 
+router.route('/all').get(purchaseController.getAllPurchases);
+
 module.exports = router;

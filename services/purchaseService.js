@@ -10,6 +10,11 @@ exports.create = async (data, user) => {
 
 exports.getOwnPurchases = async (user) => {
   const id = user._id;
-  const purchases = await Purchase.find({ownerId: id});
+  const purchases = await Purchase.find({ ownerId: id });
+  return purchases;
+};
+
+exports.getAllPurchases = async () => {
+  const purchases = await Purchase.find().populate('ownerId');
   return purchases;
 };

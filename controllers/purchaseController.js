@@ -13,5 +13,10 @@ exports.createPurchase = catchAsync(async (req, res, next) => {
 
 exports.getOwnPurchases = catchAsync(async (req, res, next) => {
   const result = await purchaseService.getOwnPurchases(req.user);
-  res.status(200).json(result)
+  res.status(200).json(result);
+});
+
+exports.getAllPurchases = catchAsync(async (req, res, next) => {
+  const result = await purchaseService.getAllPurchases();
+  res.status(200).json(result);
 });
