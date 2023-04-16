@@ -9,7 +9,11 @@ exports.create = async (data, user) => {
 };
 
 exports.getOne = async (slug) => {
-  let furniture = Furniture.find({ slug: slug });
+  console.log('run');
+  let furniture = Furniture.find({ slug: slug }).populate({
+    path: 'comments.ownerId',
+    select: '-password -email -address -purchaseHistory -role -shippingAddress -__v',
+  });
 
   return await furniture;
 };
