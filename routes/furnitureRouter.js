@@ -11,4 +11,5 @@ router
   .patch(furnitureController.updateOne)
   .delete(furnitureController.deleteOne);
 
+router.route('/:slug/comments').post(furnitureController.createComment);
 module.exports = router;

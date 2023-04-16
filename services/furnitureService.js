@@ -42,5 +42,12 @@ exports.decreaseStock = async (id, quantity) => {
     { quantity: updatedStock },
     { runValidators: true }
   );
-  console.log('dec', decreasedFurniture, updatedStock);
+};
+
+exports.createComment = async (user, data) => {
+  const comment = await Furniture.findByIdAndUpdate(data.id, {
+    $push: { comments: { ownerId: user._id, comment: data.comment } },
+    ratings: { ownerId: user._id, rating: data.starsRange },
+  });
+  return comment;
 };
