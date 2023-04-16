@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const slugify = require('slug')
+const slugify = require('slug');
 
 const furnitureSchema = new mongoose.Schema({
   name: {
@@ -44,17 +44,40 @@ const furnitureSchema = new mongoose.Schema({
   },
   img: String,
   slug: String,
-  ratingsAverage: {
-    type: Number,
-    default: 1,
-    min: [1, 'Rating must be above 1.0'],
-    max: [5, 'Rating must be below 5.0'],
-    set: (val) => Math.round(val * 10) / 10,
+  // ratingsAverage: {
+  //   type: Number,
+  //   default: 1,
+  //   min: [1, 'Rating must be above 1.0'],
+  //   max: [5, 'Rating must be below 5.0'],
+  //   set: (val) => Math.round(val * 10) / 10,
+  // },
+  ratings: {
+    ownerId: {
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
+    },
+    rating: {
+      type: Number,
+      min: [1, 'Rating must be above 1.0'],
+      max: [5, 'Rating must be below 5.0'],
+    },
   },
-  ratingsQuantity: {
-    type: Number,
-    default: 0,
-  },
+
+  // ratingsQuantity: {
+  //   type: Number,
+  //   default: 0,
+  // },
+  comments: [
+    {
+      ownerId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+      },
+      comment: {
+        type: String,
+      },
+    },
+  ],
   priceDiscount: {
     type: Number,
     validate: {
@@ -75,9 +98,10 @@ const furnitureSchema = new mongoose.Schema({
     ref: 'User',
   },
 });
-furnitureSchema.pre('save', function(next) {
-
-  this.slug = slugify(`${this.type} ${this.name} ${this.partNumber}`, { lower: true });
+furnitureSchema.pre('save', function (next) {
+  this.slug = slugify(`${this.type} ${this.name} ${this.partNumber}`, {
+    lower: true,
+  });
   next();
 });
 
