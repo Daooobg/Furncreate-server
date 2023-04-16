@@ -2,6 +2,7 @@ const Purchase = require('../models/purchaseModule');
 
 exports.create = async (data, user) => {
   data.ownerId = user._id;
+  data.furnitureId = data.id;
   data.date = Date.now();
   data.shippingAddress = user.shippingAddress;
   const purchase = await Purchase.create(data);
@@ -15,6 +16,6 @@ exports.getOwnPurchases = async (user) => {
 };
 
 exports.getAllPurchases = async () => {
-  const purchases = await Purchase.find().populate('ownerId');
+  const purchases = await Purchase.find().sort('-date').populate('ownerId furnitureId');
   return purchases;
 };

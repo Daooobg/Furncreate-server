@@ -5,6 +5,10 @@ const purchaseSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: 'User',
   },
+  furnitureId: {
+    type:mongoose.Types.ObjectId,
+    ref: 'Furniture'
+  },
   product: {
     type: String,
   },
