@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
     },
     firstLine: {
       type: String,
-      required: [true, 'Please enter  your address'],
+      // required: [true, 'Please enter  your address'],
       minlength: [4, 'Address must have more or equal then 4 characters'],
     },
     secondLine: {
@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
     },
     city: {
       type: String,
-      required: [true, 'Please enter  your city'],
+      // required: [true, 'Please enter  your city'],
       minlength: [2, 'City must have more or equal then 2 characters'],
     },
     county: {
@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema({
     },
     postcode: {
       type: String,
-      required: [true, 'Please enter  your postcode'],
+      // required: [true, 'Please enter  your postcode'],
       minlength: [6, 'Postcode must have more or equal then 6 characters'],
     },
   },
@@ -61,7 +61,7 @@ const userSchema = new mongoose.Schema({
     },
     firstLine: {
       type: String,
-      required: [true, 'Please enter  your address'],
+      // required: [true, 'Please enter  your address'],
       minlength: [4, 'Address must have more or equal then 4 characters'],
     },
     secondLine: {
@@ -69,7 +69,7 @@ const userSchema = new mongoose.Schema({
     },
     city: {
       type: String,
-      required: [true, 'Please enter  your city'],
+      // required: [true, 'Please enter  your city'],
       minlength: [2, 'City must have more or equal then 2 characters'],
     },
     county: {
@@ -78,7 +78,7 @@ const userSchema = new mongoose.Schema({
     },
     postcode: {
       type: String,
-      required: [true, 'Please enter  your postcode'],
+      // required: [true, 'Please enter  your postcode'],
       minlength: [6, 'Postcode must have more or equal then 6 characters'],
     },
   },

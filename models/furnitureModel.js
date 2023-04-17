@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const slugify = require('slug');
+const startUrl = /^(https?:\/)?\/.*/i;
 
 const furnitureSchema = new mongoose.Schema({
   name: {
@@ -14,7 +15,10 @@ const furnitureSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['sofas', 'chairs', 'tables', 'beds'],
+    enum: {
+      values: ['sofas', 'chairs', 'tables', 'beds'],
+      message: 'Type must be sofas, chairs, tables or beds',
+    },
     default: ['undefined'],
   },
   warranty: {
@@ -42,7 +46,14 @@ const furnitureSchema = new mongoose.Schema({
     type: Number,
     min: [0, 'quantity must be positive number'],
   },
-  img: String,
+  img: {
+    type: String,
+    required: [true, 'Please send us your pet image'],
+    validate: {
+      validator: (value) => startUrl.test(value),
+      message: `Please add valid image URL`,
+    },
+  },
   slug: String,
   // ratingsAverage: {
   //   type: Number,
