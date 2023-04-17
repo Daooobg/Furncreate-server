@@ -12,7 +12,8 @@ exports.getOne = async (slug) => {
   console.log('run');
   let furniture = Furniture.find({ slug: slug }).populate({
     path: 'comments.ownerId',
-    select: '-password -email -address -purchaseHistory -role -shippingAddress -__v',
+    select:
+      '-password -email -address -purchaseHistory -role -shippingAddress -__v',
   });
 
   return await furniture;
@@ -50,7 +51,13 @@ exports.decreaseStock = async (id, quantity) => {
 
 exports.createComment = async (user, data) => {
   const comment = await Furniture.findByIdAndUpdate(data.id, {
-    $push: { comments: { ownerId: user._id, comment: data.comment } },
+    $push: {
+      comments: {
+        ownerId: user._id,
+        comment: data.comment,
+        rating: data.starsRange,
+      },
+    },
     ratings: { ownerId: user._id, rating: data.starsRange },
   });
   return comment;

@@ -62,7 +62,9 @@ const furnitureSchema = new mongoose.Schema({
       max: [5, 'Rating must be below 5.0'],
     },
   },
-
+  // rating: {
+  //   type: Number,
+  // },
   // ratingsQuantity: {
   //   type: Number,
   //   default: 0,
@@ -75,6 +77,9 @@ const furnitureSchema = new mongoose.Schema({
       },
       comment: {
         type: String,
+      },
+      rating: {
+        type: Number,
       },
     },
   ],
